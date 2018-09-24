@@ -25,22 +25,22 @@ exports.index = function(req, res) {
   return User.find({}).exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
-}
+};
 
 exports.show = function(req, res) {
   return User.findById(req.params.id).exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
-}
+};
 
 exports.create = function(req, res) {
   return User.findOne({username: req.body.username}).exec()
     .then(user => {
       if(user) {
-        return Promise.resolve({code:1000, message: '该用户已存在！'});
+        return Promise.resolve({code: 1000, message: '该用户已存在！'});
       }
       return User.create(req.body);
     })
     .then(respondWithResult(res))
     .catch(handleError(res));
-}
+};
